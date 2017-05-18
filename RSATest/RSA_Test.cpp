@@ -1,4 +1,4 @@
-#include "RSA_Test.h"
+ï»¿#include "RSA_Test.h"
 #include <ctime>
 
 RSA_Test::RSA_Test()
@@ -36,17 +36,17 @@ void RSA_Test::operator ()(uint _p, uint _q) {
 }
 void RSA_Test::encrypt(uint& c, uint m) const
 {
-	//solve m**e ¡Ô c (mod n) => c=m**e%n
+	//solve m**e â‰¡ c (mod n) => c=m**e%n
 	mpz_powm(c, m, e, n);
 }
 void RSA_Test::decrypt(uint& m, uint c) const
 {
-	//solve c**d ¡Ô m (mod n) => m=c**d%n
+	//solve c**d â‰¡ m (mod n) => m=c**d%n
 	mpz_powm(m, c, d, n);
 }
 void RSA_Test::GeneratePublickey(uint& e, uint& p, uint& q)
 {
-	///¦Õ(n)=(p-1)*(q-1)
+	///Ï†(n)=(p-1)*(q-1)
 	uint p1, q1;
 	mpz_init(p1);
 	mpz_init(q1);
@@ -56,10 +56,10 @@ void RSA_Test::GeneratePublickey(uint& e, uint& p, uint& q)
 	mpz_clear(p1);
 	mpz_clear(q1);
 
-	///1< e < ¦Õ(n) && coprime(e,¦Õ(n))
+	///1< e < Ï†(n) && coprime(e,Ï†(n))
 	uint gcd_mpz;
 	mpz_init(gcd_mpz);
-	//ÖÃËæ»úÊýÖÖ×Ó
+	//ç½®éšæœºæ•°ç§å­
 	gmp_randstate_t seed_gmp;
 	gmp_randinit_default(seed_gmp);
 	gmp_randseed_ui(seed_gmp, static_cast<unsigned long>(time(nullptr)));
@@ -68,7 +68,7 @@ void RSA_Test::GeneratePublickey(uint& e, uint& p, uint& q)
 	{
 		mpz_urandomm(e, seed_gmp, z);//e=random in [0,z-1]
 		mpz_gcd(gcd_mpz, e, z);
-		if (mpz_cmp_ui(gcd_mpz, 1) == 0)//isCoprime(e,¦Õ(n))
+		if (mpz_cmp_ui(gcd_mpz, 1) == 0)//isCoprime(e,Ï†(n))
 			break;
 	}
 	gmp_randclear(seed_gmp);
@@ -76,6 +76,6 @@ void RSA_Test::GeneratePublickey(uint& e, uint& p, uint& q)
 }
 void RSA_Test::GeneratePrivatekey(uint& d, uint& e, uint& z)
 {
-	//ed ¡Ô 1 (mod ¦Õ(n)) => solve ex + ¦Õ(n)y = 1 d=x|y &&d>0
+	//ed â‰¡ 1 (mod Ï†(n)) => solve ex + Ï†(n)y = 1 d=x|y &&d>0
 	mpz_invert(d, e, z);//too big?
 }

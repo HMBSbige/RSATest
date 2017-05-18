@@ -1,4 +1,4 @@
-#include <iostream>
+ï»¿#include <iostream>
 #include "RSA_Test.h"
 
 using namespace std;
@@ -23,17 +23,17 @@ int main(int argc, string  argv[])
 	gmp_printf("n=0x%ZX\n",Test1.n);
 	gmp_printf("e=0x%ZX\n", Test1.e);
 	gmp_printf("d=0x%ZX\n", Test1.d);
-	gmp_printf("¦Õ(n)=%Zd\n", Test1.z);
+	gmp_printf("Ï†(n)=%Zd\n", Test1.z);
 	mpz_t m,c;
 	mpz_init_set_str(m,"26595",10);//m<n
 	mpz_init(c);
 	gmp_printf("m=0x%ZX\n", m);
 
-	cout << "¼ÓÃÜºó..." << endl;
+	cout << "åŠ å¯†åŽ..." << endl;
 	Test1.encrypt(c, m);
 	gmp_printf("c=0x%ZX\n", c);
 
-	cout << "½âÃÜºó..." << endl;
+	cout << "è§£å¯†åŽ..." << endl;
 	Test1.decrypt(m, c);
 	gmp_printf("m=0x%ZX\n", m);
 
@@ -45,5 +45,5 @@ int main(int argc, string  argv[])
 	return 0;
 }
 //33478071698956898786044169848212690817704794983713768568912431388982883793878002287614711652531743087737814467999489
-//¡Á
+//Ã—
 //36746043666799590428244633799627952632279158164343087642676032283815739666511279233373417143396810270092798736308917
