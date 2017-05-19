@@ -26,5 +26,8 @@
     <ClInclude Include="RSA_Test.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="myrandom.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,5 +1,5 @@
 ﻿#include "RSA_Test.h"
-#include <ctime>
+#include "myrandom.h"
 
 RSA_Test::RSA_Test()
 {
@@ -57,7 +57,10 @@ void RSA_Test::GeneratePublickey(uint& e, uint& p, uint& q)
 	mpz_clear(q1);
 
 	///1< e < φ(n) && coprime(e,φ(n))
-	uint gcd_mpz;
+	unsigned long a[] = { 3, 5, 17, 257, 65537 };
+	RandomINT R_size_t;
+	mpz_set_ui(e, a[R_size_t.GetRandomInteger<unsigned long>(0, 4)]);
+	/*uint gcd_mpz;
 	mpz_init(gcd_mpz);
 	//置随机数种子
 	gmp_randstate_t seed_gmp;
@@ -72,10 +75,10 @@ void RSA_Test::GeneratePublickey(uint& e, uint& p, uint& q)
 			break;
 	}
 	gmp_randclear(seed_gmp);
-	mpz_clear(gcd_mpz);
+	mpz_clear(gcd_mpz);*/
 }
 void RSA_Test::GeneratePrivatekey(uint& d, uint& e, uint& z)
 {
 	//ed ≡ 1 (mod φ(n)) => solve ex + φ(n)y = 1 d=x|y &&d>0
-	mpz_invert(d, e, z);//too big?
+	mpz_invert(d, e, z);
 }
