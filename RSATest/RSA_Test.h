@@ -10,22 +10,23 @@ class RSA_Test
 {
 	using uint = mpz_t;
 public:
-	RSA_Test();
-	~RSA_Test();
-	void Init();
-	void release();
-	void operator ()(uint _p, uint _q);
-	void encrypt(uint& c, uint m) const;
-	void decrypt(uint& m, uint c) const;
-//private:
 	uint p, q;//prime
 	uint n;//p*q
 	uint e;
 	uint d;
 	uint z;
 
+	RSA_Test();
+	~RSA_Test();
+	void Init();
+	void release();
+	void operator ()(size_t bit_length);
+	void encrypt(uint& c, const uint& m) const;
+	void decrypt(uint& m, const uint& c) const;
+
 	//public key:(e,n)
 	//private key:(d,n)
-	void GeneratePublickey(uint& e, uint& p, uint& q);
+	static void GeneratePublickey(uint& e);
 	static void GeneratePrivatekey(uint& d, uint& e, uint& z);
+	void gmpRandomPrime(mpz_t& prime_p, mpz_t& prime_q, size_t bit_length);
 };
