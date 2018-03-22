@@ -9,6 +9,8 @@
 # 使用说明
 这只是RSA算法测试，因算法问题生成的位数其实不定，写着2048位可能生成2047位
 
+有几率测试失败
+
 # 例子
 ![](https://raw.githubusercontent.com/HMBSbige/RSATest/master/pic/sample.png)
 # 参考资料

@@ -10,11 +10,11 @@ class RSA_Test
 {
 	using uint = mpz_t;
 public:
-	uint p, q;//prime
-	uint n;//p*q
-	uint e;
-	uint d;
-	uint z;
+	uint p{}, q{};//prime
+	uint n{};//p*q
+	uint e{};
+	uint d{};
+	uint z{};
 
 	RSA_Test();
 	~RSA_Test();
