@@ -6,28 +6,32 @@
 using namespace std;
 void output_starter()
 {
-	cout << "\n输入想要的密钥长度(>1):";
+	cout << "\n输入想要的密钥长度(>2):";
 }
 int main(int argc, string  argv[])
 {
 	//_wsetlocale(LC_ALL, L"");
 	unsigned int length;
 	output_starter();
-	while(cin>>length)
+	while (cin >> length)
 	{
+		if (length <= 2)
+		{
+			length = 3;
+		}
 		RSA_Test test1;
 		test1(length);
-		gmp_printf("p=0x%ZX\n\n", test1.p);
+		gmp_printf("p=0x%ZX\n", test1.p);
 		gmp_printf("p=%Zd\n\n", test1.p);
-		gmp_printf("q=0x%ZX\n\n", test1.q);
+		gmp_printf("q=0x%ZX\n", test1.q);
 		gmp_printf("q=%Zd\n\n", test1.q);
-		gmp_printf("n=0x%ZX\n\n", test1.n);
+		gmp_printf("n=0x%ZX\n", test1.n);
 		gmp_printf("n=%Zd\n\n", test1.n);
 		cout << "密钥长度：" << mpz_sizeinbase(test1.n, 2) << "位" << endl;
 		gmp_printf("e=%Zd\n\n", test1.e);
-		gmp_printf("d=0x%ZX\n\n", test1.d);
+		gmp_printf("d=0x%ZX\n", test1.d);
 		gmp_printf("d=%Zd\n\n", test1.d);
-		gmp_printf("φ(n)=0x%ZX\n\n", test1.z);
+		gmp_printf("φ(n)=0x%ZX\n", test1.z);
 		gmp_printf("φ(n)=%Zd\n\n", test1.z);
 
 		mpz_t m, c, _m;
@@ -43,17 +47,17 @@ int main(int argc, string  argv[])
 		mpz_urandomm(m, seed_gmp, test1.n);//m<n
 		gmp_randclear(seed_gmp);
 
-		gmp_printf("m=0x%ZX\n\n", m);
+		gmp_printf("m=0x%ZX\n", m);
 		gmp_printf("m=%Zd\n\n", m);
 
 		cout << "加密后..." << endl;
 		test1.encrypt(c, m);
-		gmp_printf("c=0x%ZX\n\n", c);
+		gmp_printf("c=0x%ZX\n", c);
 		gmp_printf("c=%Zd\n\n", c);
 
 		cout << "解密后..." << endl;
 		test1.decrypt(_m, c);
-		gmp_printf("m=0x%ZX\n\n", _m);
+		gmp_printf("m=0x%ZX\n", _m);
 		gmp_printf("m=%Zd\n\n", _m);
 
 		if (mpz_cmp(m, _m) == 0)
@@ -66,7 +70,7 @@ int main(int argc, string  argv[])
 		mpz_clear(_m);
 		output_starter();
 	}
-	
+
 	//system("pause");
 	return 0;
 

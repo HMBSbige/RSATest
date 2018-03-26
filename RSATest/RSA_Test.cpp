@@ -29,7 +29,10 @@ void RSA_Test::release()
 }
 void RSA_Test::operator ()(size_t bit_length){
 	GeneratePublickey(e);
-	gmpRandomPrime(p, q, bit_length);
+	do
+	{
+		gmpRandomPrime(p, q, bit_length);
+	} while (mpz_cmp(p,q) == 0);
 	mpz_mul(n, p, q);//n = p*q;
 	GeneratePrivatekey(d, e, z);
 }
